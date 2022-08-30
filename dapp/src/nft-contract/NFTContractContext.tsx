@@ -145,11 +145,15 @@ export const NFTContractProvider: React.FC<PropsWithChildren<{}>> = ({ children 
             });
             const results = await Promise.all(promises);
             const newWalletTokenIds: Record<string, number[]> = {};
+            const newWalletBalances = { ...walletBalance };
 
             nftAddresses.forEach((nftAddress, index) => {
-                newWalletTokenIds[nftAddress] = results[index];
+                const newTokens = results[index];
+                newWalletTokenIds[nftAddress] = newTokens;
+                walletBalance[nftAddress] = newTokens.length;
             });
 
+            setWalletBalance(newWalletBalances);
             setWalletTokenIds(newWalletTokenIds);
             setWalletTokenIdsInited(true);
         }

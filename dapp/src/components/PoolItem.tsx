@@ -64,11 +64,12 @@ const Content = styled.div`
 
 const PoolNotStartedText = styled.div`
     text-align: center;
-    font-size: 1rem;
-    color: #c9b0da;
-    font-weight: 600;
+    font-size: .8rem;
+    color: white;
     line-height: 1.25rem;
     padding: 0 1.75rem;
+    max-width: 150px;
+    margin: 2rem auto 0;
 `;
 
 const PoolName = styled(TextFit)`
@@ -194,9 +195,7 @@ const PoolItem: React.FC<PoolItemProps> = ({
         if (poolContractContext.poolState === 'NotStarted') {
             return (
                 <PoolNotStartedText className="mt-4">
-                    Waiting the coffin to be filled and closed...
-                    <br /><br />
-                    Patience...
+                    We are still filling the pool...
                 </PoolNotStartedText>
             )
         } else {

@@ -103,6 +103,10 @@ export class PoolContractWrapper extends EventEmitter {
         return this.poolContract.isRewardingEnabled();
     }
 
+    public async isStakingEnabled(): Promise<boolean> {
+        return this.poolContract.stakingEnabled();
+    }
+
     public async stakeNfts(nftAddress: string, tokenIds: number[]): Promise<void> {
         await this.waitForTx(this.poolContract.stakeNFTS(nftAddress, tokenIds));
     }

@@ -50,7 +50,7 @@ export const ListPools: React.FC<ListPoolsProps> = (props) => {
 
     return (
         <div className="relative">
-            <Container wrongNetwork={wrongNetwork} className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+            <Container wrongNetwork={wrongNetwork} className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
                 {allPools.map((pool, index) => (
                     <PoolItemWrapper className="mx-auto" key={index}>
                         <PoolItem className="mx-auto"

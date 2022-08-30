@@ -4,15 +4,13 @@
         "name": "Lantor Kids",
         "type": "leveling",
         "coverImage": "/images/pools/lanternsleveling/cover.png",
-        "poolContractAddress": "0xCF7b1d652DccA121A31c7E307c9Bc75C5bC6ABd4",
+        "poolContractAddress": "0xBeF7Cd14B92eFDD1a999bB57F34D9989d7663586",
         "nftContractAddress": [
-            "0x53eACFC46eB98FB00E9d9344143A261d14b957F6",
-            "0xA286786fAE4BCAbF9388A095a38278EF15f4F7bf"
+            "0x53eACFC46eB98FB00E9d9344143A261d14b957F6"
         ],
         "networkId": 4002,
         "nftContractNames": {
-            "0x53eACFC46eB98FB00E9d9344143A261d14b957F6": "Doodle Lanterns",
-            "0xA286786fAE4BCAbF9388A095a38278EF15f4F7bf": "Fant-O-Lanterns"
+            "0x53eACFC46eB98FB00E9d9344143A261d14b957F6": "Doodle Lanterns"
         },
         "tiers": {
             "0x53eACFC46eB98FB00E9d9344143A261d14b957F6": [
@@ -21,15 +19,8 @@
                 "Top 10%",
                 "Top 5%",
                 "FUUKING LEGEND"
-            ],
-            "0xA286786fAE4BCAbF9388A095a38278EF15f4F7bf": [
-                "Bottom 50%",
-                "Top 10-25%",
-                "Top 10%",
-                "Top 5%",
-                "FUUKING LEGEND"
             ]
         },
-        "pointDivider": 1000
+        "pointDivider": 1
     }
 ]

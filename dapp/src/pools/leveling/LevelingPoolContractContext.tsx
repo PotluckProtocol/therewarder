@@ -75,14 +75,21 @@ export const LevelingPoolContractProvider: React.FC<PropsWithChildren<{}>> = ({ 
             return;
         }
 
-        const promises: [Promise<boolean>, Promise<number>, Promise<number>] = [
+        const promises: [Promise<boolean>, Promise<boolean>, Promise<number>, Promise<number>] = [
             wrapper.isRewardingEnabled(),
+            wrapper.isStakingEnabled(),
             wrapper.getWalletLevel(walletAddress),
             wrapper.getWalletPoints(walletAddress)
         ];
 
-        const [isRewardingEnabled, newLevel, points] = await Promise.all(promises);
-        const state = isRewardingEnabled ? 'NotStarted' : 'Active';
+        const [isRewardingEnabled, isStakingEnabled, newLevel, points] = await Promise.all(promises);
+
+        let state: PoolState = 'NotStarted';
+        if (isRewardingEnabled && isStakingEnabled) {
+            state = 'Active';
+        } else if (!isRewardingEnabled && isStakingEnabled) {
+            state = 'Ended';
+        }
 
         const oldLevel = walletLevel;
         setPoolState(state);
