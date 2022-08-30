@@ -12,6 +12,7 @@ import { useNavigate } from "react-router";
 import getNftContractAddresses from "../pools/getNftContractAddresses";
 import ProgressBar from "./ProgressBar";
 import { PoolBaseInfo } from "../pools/PoolBaseInfo";
+import useScreenSize from "../hooks/useScreenSize";
 
 export type PoolItemProps = {
     className?: string;
@@ -78,9 +79,9 @@ const PoolName = styled(TextFit)`
     text-shadow: -3px 3px #72b6b6;
 `;
 
-const CoverImageContainer = styled.div`
+const CoverImageContainer = styled.div<{ isSmallScreen: boolean }>`
     position: relative;
-    max-width: 130px;
+    max-width: ${props => props.isSmallScreen ? 115 : 130}px;
 `;
 
 const CoverImage = styled.img`
@@ -118,10 +119,12 @@ const PoolItem: React.FC<PoolItemProps> = ({
     mode: rawMode
 }) => {
     const user = useUser();
+    const screenSize = useScreenSize();
     const nftContractContext = useContext(NFTContractContext);
     const poolContractContext = useContext(LevelingPoolContractContext);
     const navigate = useNavigate();
 
+    const isSmallScreen = screenSize === 'xs';
     const isConnected = !!user.account;
 
     useEffect(() => {
@@ -245,9 +248,9 @@ const PoolItem: React.FC<PoolItemProps> = ({
         <>
             <Container active={active} className={className}>
                 <Content>
-                    <PoolName className="flex items-center justify-center mb-4" height={55}>{baseInfo.name}</PoolName>
+                    <PoolName className="flex items-center justify-center my-4" height={55}>{baseInfo.name}</PoolName>
                     <div className='flex justify-center'>
-                        <CoverImageContainer>
+                        <CoverImageContainer isSmallScreen={isSmallScreen}>
                             <PositionedNetworkIcon size={30} networkId={baseInfo.networkId} />
                             <CoverImage src={baseInfo.coverImage} />
                         </CoverImageContainer>

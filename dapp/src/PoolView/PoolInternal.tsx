@@ -25,7 +25,7 @@ const Container = styled.div`
     border: 3px solid #5dffff;
     background-color: rgba(0,0,0,0.75);
     border-radius: .5rem;
-    box-shadow: #5dffff 1px 1px 18px 1px;
+    rgba(93,255,255,0.4) 1px 1px 15px 1px;
 `;
 
 const PoolName = styled(TextFit)`
@@ -44,14 +44,21 @@ const Content = styled.div`
 `;
 
 const LevelText = styled.div`
+    font-family: Akira;
     color: white;
-    font-size: 18px;
+    font-size: 1.1rem;
     text-transform: uppercase;
+
+    & span {
+        color: #5dffff;
+        font-size: 1.5rem;
+    }
 `;
 
 const Subtitle = styled.h2`
     font-size: 1.5rem;
     color: White;
+    font-family: Akira;
 `;
 
 const CollectionContainer = styled.div`
@@ -62,6 +69,7 @@ const CollectionContainer = styled.div`
 `;
 
 const CollectionName = styled.h3`
+    font-family: Akira;
     font-size: 1.25rem;
     color: White;
     font-weight: 600;
@@ -212,7 +220,7 @@ const PoolInternal: React.FC<PoolInternalProps> = ({
                     </div>
 
                     <Content>
-                        <LevelText>Wallet level {poolContractContext.walletLevel}</LevelText>
+                        <LevelText>Wallet level <span>{poolContractContext.walletLevel}</span></LevelText>
 
                         {renderProgressBar()}
 

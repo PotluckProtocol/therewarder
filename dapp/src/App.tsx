@@ -12,7 +12,7 @@ import { PoolsBaseInfoContext } from './pools/PoolsBaseInfoContext';
 import useScreenSize from './hooks/useScreenSize';
 
 const Container = styled.div`
-    max-width: 1200px;
+    max-width: 1400px;
 `;
 
 const Header = styled.h1<{ isSmallScreen: boolean }>`

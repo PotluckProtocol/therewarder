@@ -17,8 +17,8 @@ const Container = styled.div`
 `;
 
 const Value = styled.div`
-    font-weight: 600;
-    color: #d5c3e1;
+    font-family: Akira;
+    color: white;
 `;
 
 const SubValue = styled.div`

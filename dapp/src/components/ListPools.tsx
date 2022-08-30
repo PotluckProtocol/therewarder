@@ -54,7 +54,6 @@ export const ListPools: React.FC<ListPoolsProps> = (props) => {
                 {allPools.map((pool, index) => (
                     <PoolItemWrapper className="mx-auto" key={index}>
                         <PoolItem className="mx-auto"
-
                             baseInfo={pool}
                             mode={props.mode}
                         />
