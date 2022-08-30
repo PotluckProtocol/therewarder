@@ -11,7 +11,7 @@ const countPointsPerDay = (
     for (const tokenTier of tokenTiers) {
         const pointsPerSecond = pointCalculationDetails.pointsBasePerSecond * pointCalculationDetails.tierMultipliers[tokenTier] * pointCalculationDetails.weight;
         const dayPoints = SECONDS_IN_DAY * pointsPerSecond;
-        const adjusted = Math.floor(dayPoints / 100);
+        const adjusted = Math.floor(dayPoints / 100 / 100);
         sum += adjusted;
     }
 

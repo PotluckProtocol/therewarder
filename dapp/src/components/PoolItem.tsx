@@ -181,12 +181,14 @@ const PoolItem: React.FC<PoolItemProps> = ({
     }
 
     const renderProgressBar = () => {
+        const fixPoints = (p: number): number => Math.floor(p / (baseInfo.pointDivider || 1))
+
         const { walletPoints, currentLevelPointBoundary, nextLevelPointBoundary } = poolContractContext;
         const value = walletPoints - currentLevelPointBoundary;
         const max = nextLevelPointBoundary - currentLevelPointBoundary;
         return (
             <ProgressBarWrapper>
-                <ProgressBar labelFontSize={10} value={value} min={0} max={max} />
+                <ProgressBar labelFontSize={10} value={fixPoints(value)} min={0} max={fixPoints(max)} />
             </ProgressBarWrapper>
         );
     }

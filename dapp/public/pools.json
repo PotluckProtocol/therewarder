@@ -4,7 +4,7 @@
         "name": "Lantor Kids",
         "type": "leveling",
         "coverImage": "/images/pools/lanternsleveling/cover.png",
-        "poolContractAddress": "0xBeF7Cd14B92eFDD1a999bB57F34D9989d7663586",
+        "poolContractAddress": "0x3C952E84ddf968810A90BEE8c04e4be17FCED753",
         "nftContractAddress": [
             "0x53eACFC46eB98FB00E9d9344143A261d14b957F6"
         ],
@@ -21,6 +21,6 @@
                 "FUUKING LEGEND"
             ]
         },
-        "pointDivider": 1
+        "pointDivider": 86400
     }
 ]

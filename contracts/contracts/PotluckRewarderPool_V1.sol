@@ -496,7 +496,7 @@ contract PotluckRewarderPoolV1 is IERC721Receiver, ReentrancyGuard, Ownable {
         external
         onlyOwner
     {
-        pointsPerSecondBase = _pointsPerLevelBase;
+        pointsPerLevelBase = _pointsPerLevelBase;
     }
 
     function modifyCollectionWeight(
