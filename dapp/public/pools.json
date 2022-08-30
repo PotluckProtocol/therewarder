@@ -1,0 +1,35 @@
+[
+    {
+        "id": "leveluptest",
+        "name": "Lantor Kids",
+        "type": "leveling",
+        "coverImage": "/images/pools/lanternsleveling/cover.png",
+        "poolContractAddress": "0xCF7b1d652DccA121A31c7E307c9Bc75C5bC6ABd4",
+        "nftContractAddress": [
+            "0x53eACFC46eB98FB00E9d9344143A261d14b957F6",
+            "0xA286786fAE4BCAbF9388A095a38278EF15f4F7bf"
+        ],
+        "networkId": 4002,
+        "nftContractNames": {
+            "0x53eACFC46eB98FB00E9d9344143A261d14b957F6": "Doodle Lanterns",
+            "0xA286786fAE4BCAbF9388A095a38278EF15f4F7bf": "Fant-O-Lanterns"
+        },
+        "tiers": {
+            "0x53eACFC46eB98FB00E9d9344143A261d14b957F6": [
+                "Bottom 50%",
+                "Top 10-25%",
+                "Top 10%",
+                "Top 5%",
+                "FUUKING LEGEND"
+            ],
+            "0xA286786fAE4BCAbF9388A095a38278EF15f4F7bf": [
+                "Bottom 50%",
+                "Top 10-25%",
+                "Top 10%",
+                "Top 5%",
+                "FUUKING LEGEND"
+            ]
+        },
+        "pointDivider": 1000
+    }
+]
