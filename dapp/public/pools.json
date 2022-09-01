@@ -1,26 +1,31 @@
 [
     {
-        "id": "leveluptest",
-        "name": "Lantor Kids",
+        "id": "onis",
+        "name": "Onis",
         "type": "leveling",
-        "coverImage": "/images/pools/lanternsleveling/cover.png",
-        "poolContractAddress": "0x3C952E84ddf968810A90BEE8c04e4be17FCED753",
+        "coverImage": "/images/pools/onis/oni.png",
+        "poolContractAddress": "0x81638132e4FC522126b6F1697C408e7630F8f291",
         "nftContractAddress": [
-            "0x53eACFC46eB98FB00E9d9344143A261d14b957F6"
+            "0x41497050c1f6f76b6AEA8A687df46A65Fa2AcDc4",
+            "0x7770A86373cFBAE7b24c19094C3A7DC9C93D95c8"
         ],
-        "networkId": 4002,
+        "networkId": 250,
         "nftContractNames": {
-            "0x53eACFC46eB98FB00E9d9344143A261d14b957F6": "Doodle Lanterns"
+            "0x41497050c1f6f76b6AEA8A687df46A65Fa2AcDc4": "Onis Retribution",
+            "0x7770A86373cFBAE7b24c19094C3A7DC9C93D95c8": "Onis"
         },
         "tiers": {
-            "0x53eACFC46eB98FB00E9d9344143A261d14b957F6": [
+            "0x41497050c1f6f76b6AEA8A687df46A65Fa2AcDc4": [
                 "Bottom 50%",
-                "Top 10-25%",
-                "Top 10%",
-                "Top 5%",
-                "FUUKING LEGEND"
+                "Top 26-50%",
+                "Top 16-25%",
+                "Top 6-15%",
+                "Top 5%"
+            ],
+            "0x7770A86373cFBAE7b24c19094C3A7DC9C93D95c8": [
+                "All"
             ]
         },
-        "pointDivider": 86400
+        "pointDivider": 8640000
     }
 ]
