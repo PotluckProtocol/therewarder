@@ -170,7 +170,7 @@ export const NFTContractProvider: React.FC<PropsWithChildren<{}>> = ({ children 
             setWalletTokenIds(newWalletTokenIds);
 
             const newWalletBalances = { ...walletBalance };
-            walletBalance[nftAddress] = newTokens.length;
+            newWalletBalances[nftAddress] = newTokens.length;
             setWalletBalance(newWalletBalances);;
         }
     }
@@ -183,7 +183,7 @@ export const NFTContractProvider: React.FC<PropsWithChildren<{}>> = ({ children 
             setWalletTokenIds(newWalletTokenIds);
 
             const newWalletBalances = { ...walletBalance };
-            walletBalance[nftAddress] = newTokens.length;
+            newWalletBalances[nftAddress] = newTokens.length;
             setWalletBalance(newWalletBalances);;
         }
     }
