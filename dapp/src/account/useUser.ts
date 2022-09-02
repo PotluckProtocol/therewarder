@@ -13,7 +13,11 @@ const PUBLIC_PROVIDER_MAP: any = {
     4002: {
         isPublic: true,
         web3: new ethers.providers.JsonRpcProvider('https://rpc.testnet.fantom.network/')
-    }
+    },
+    43114: {
+        isPublic: true,
+        web3: new ethers.providers.JsonRpcProvider('https://api.avax.network/ext/bc/C/rpc')
+    },
 }
 
 export type User = {

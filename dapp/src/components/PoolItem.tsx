@@ -220,7 +220,7 @@ const PoolItem: React.FC<PoolItemProps> = ({
                             />
                         </>
                     ) : (
-                        <>
+                        <div className="pt-2">
                             <SimpleItemPair
                                 className="mb-1"
                                 label='Collections in pool'
@@ -231,7 +231,7 @@ const PoolItem: React.FC<PoolItemProps> = ({
                                 label='Total staked'
                                 value={poolContractContext.totalStaked.toString()}
                             />
-                        </>
+                        </div>
                     )}
                 </InfoContainer>
             );

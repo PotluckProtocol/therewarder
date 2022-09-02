@@ -2,7 +2,7 @@ import { useContext } from "react";
 import styled from "styled-components";
 import { AccountContext } from "../account/AccountContext";
 import { NetworkIcon } from "./NetworkIcon";
-import { RoundedButton, RoundedButtonProps } from "./RoundedButton";
+import { RoundedButton } from "./RoundedButton";
 
 const toShortWallet = (walletAddr: string): string => {
     return [
@@ -11,41 +11,13 @@ const toShortWallet = (walletAddr: string): string => {
     ].join('...');
 }
 
-type ButtonGroupProps = {
-    singleMode: boolean;
-}
-
 const ConnectButton = styled(RoundedButton)`
-    ${(props: any) => props.shadow && `box-shadow: #43b8b8 0px 0px 10px 2px;`}
+    box-shadow: #43b8b8 0px 0px 10px 2px;
     background-color: #000;
     color: #fff;
-    display: block;
     padding: .3rem .7rem;
     font-size: 1rem;
     line-height: 25px;
-`;
-
-const NetworkButton = styled(ConnectButton)`
-    padding: .3rem .5rem .3rem 0; 
-`;
-
-const ButtonGroup = styled.div<ButtonGroupProps>`
-    ${props => (!props.singleMode) && `
-        button:not(:last-child) {
-            border-right: 0;
-        }
-
-        button:first-child {
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0; 
-        }
-
-        button:last-child {
-            border-right: inherit;
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0; 
-        }
-    `}
 `;
 
 export const ConnectWalletButton: React.FC = () => {
@@ -66,23 +38,12 @@ export const ConnectWalletButton: React.FC = () => {
         connectButtonText = toShortWallet(accountContext.account.walletAddress);
     }
 
-    // Single button mode if there is no account connected
-    const useSingleButtonMode = !accountContext.account;
-
-    const anyProps: any = { shadow: useSingleButtonMode }
-
     return (
-        <div>
-            <ButtonGroup singleMode={useSingleButtonMode} className="flex justify-center items-center">
-                <ConnectButton onClick={handleButtonClick} {...anyProps}>
-                    {connectButtonText}
-                </ConnectButton>
-                {(!!accountContext.account) && (
-                    <NetworkButton>
-                        <NetworkIcon networkId={accountContext.account.network.networkId} size={25} />
-                    </NetworkButton>
-                )}
-            </ButtonGroup>
-        </div>
+        <ConnectButton onClick={handleButtonClick} className="flex justify-between items-center">
+            <div>{connectButtonText}</div>
+            {(!!accountContext.account) && (
+                <NetworkIcon className="ml-2" networkId={accountContext.account.network.networkId} size={25} />
+            )}
+        </ConnectButton>
     )
 }

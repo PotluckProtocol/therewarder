@@ -60,7 +60,6 @@ export const Main: React.FC = () => {
             </div>
 
             <div>
-
                 <ListPools
                     mode={mode}
                 />

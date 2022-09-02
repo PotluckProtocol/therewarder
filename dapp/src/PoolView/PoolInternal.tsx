@@ -3,9 +3,11 @@ import { useNavigate } from "react-router";
 import styled from "styled-components";
 import useUser from "../account/useUser";
 import { ConnectWalletButton } from "../components/ConnectWalletButton";
+import { NetworkIcon } from "../components/NetworkIcon";
 import ProgressBar from "../components/ProgressBar";
 import { RoundedButton } from "../components/RoundedButton";
 import { TextFit } from "../components/TextFit";
+import { resolveNetwork } from "../network/resolveNetwork";
 import { NFTContractContext } from "../nft-contract/NFTContractContext";
 import getNftContractAddresses from "../pools/getNftContractAddresses";
 import getNftContractName from "../pools/getNftContractName";
@@ -105,6 +107,17 @@ const NotConnected = styled.div`
     margin-top: 4rem;
 `;
 
+const PositionedNetworkIcon = styled(NetworkIcon)`
+    position: absolute;
+    top: -0.25rem;
+    left: 0;
+`;
+
+const WrongNetwork = styled.div`
+    color: white;
+    font-size: .85rem;
+`;
+
 const PoolInternal: React.FC<PoolInternalProps> = ({
     poolInfo
 }) => {
@@ -147,11 +160,13 @@ const PoolInternal: React.FC<PoolInternalProps> = ({
 
     if (!user.account) {
         return (
-            <NotConnected>
+            <NotConnected className="flex justify-center">
                 <ConnectWalletButton />
             </NotConnected>
         )
     }
+
+    const isWrongNetwork = user.account.network.networkId !== poolInfo.networkId;
 
     const renderTableBody = (nftAddress: string) => {
         let content: React.ReactNode;
@@ -217,7 +232,8 @@ const PoolInternal: React.FC<PoolInternalProps> = ({
             <Container className='mx-auto mt-16 p-4'>
                 <PoolName className="mb-6 px-4 text-center md:text-left" height={50}>{poolInfo.name}</PoolName>
                 <div className='block md:flex'>
-                    <div className="md:mr-8 my-8 md:my-0">
+                    <div className="md:mr-8 my-8 md:my-0 relative">
+                        <PositionedNetworkIcon networkId={poolInfo.networkId} size={50} />
                         <PoolImage className="mx-auto md:mx-0 " src={poolInfo.coverImage} />
                     </div>
 
@@ -234,7 +250,6 @@ const PoolInternal: React.FC<PoolInternalProps> = ({
                                 return (
                                     <CollectionContainer className="mt-6" key={nftAddress}>
                                         <CollectionName className='mb-2'>{nftAddressName}</CollectionName>
-
                                         <Table>
                                             <thead>
                                                 <tr>
@@ -246,16 +261,23 @@ const PoolInternal: React.FC<PoolInternalProps> = ({
                                             {renderTableBody(nftAddress)}
                                         </Table>
 
-                                        <CollectionButton className='mt-4' onClick={createHandleOpenStaking(nftAddress)}>
-                                            Stake / Unstake
-                                        </CollectionButton>
+                                        {isWrongNetwork ? (
+                                            <WrongNetwork className="mt-4">
+                                                To stake/unstake, connect to <b>{resolveNetwork(poolInfo.networkId).name}</b>
+                                            </WrongNetwork>
+                                        ) : (
+                                            <CollectionButton className='mt-4' onClick={createHandleOpenStaking(nftAddress)}>
+                                                Stake / Unstake
+                                            </CollectionButton>
+                                        )}
+
                                     </CollectionContainer>
                                 )
                             })}
                         </div>
                     </Content>
                 </div>
-            </Container>
+            </Container >
 
             {isPopupOpen && (
                 <StakingPopup
