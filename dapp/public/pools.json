@@ -6,13 +6,11 @@
         "coverImage": "/images/pools/onis/oni.png",
         "poolContractAddress": "0x81638132e4FC522126b6F1697C408e7630F8f291",
         "nftContractAddress": [
-            "0x41497050c1f6f76b6AEA8A687df46A65Fa2AcDc4",
-            "0x7770A86373cFBAE7b24c19094C3A7DC9C93D95c8"
+            "0x41497050c1f6f76b6AEA8A687df46A65Fa2AcDc4"
         ],
         "networkId": 250,
         "nftContractNames": {
-            "0x41497050c1f6f76b6AEA8A687df46A65Fa2AcDc4": "Onis Retribution",
-            "0x7770A86373cFBAE7b24c19094C3A7DC9C93D95c8": "Onis"
+            "0x41497050c1f6f76b6AEA8A687df46A65Fa2AcDc4": "Onis Retribution"
         },
         "tiers": {
             "0x41497050c1f6f76b6AEA8A687df46A65Fa2AcDc4": [
@@ -21,11 +19,8 @@
                 "Top 16-25%",
                 "Top 6-15%",
                 "Top 5%"
-            ],
-            "0x7770A86373cFBAE7b24c19094C3A7DC9C93D95c8": [
-                "All"
             ]
         },
-        "pointDivider": 8640000
+        "pointDivider": 864000
     }
 ]
