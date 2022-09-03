@@ -1,8 +1,62 @@
 [
     {
+        "id": "lanterns-ftm",
+        "name": "Lanterns FTM",
+        "coverImage": "/images/pools/lanterns/ftm.png",
+        "poolContractAddress": "0xD3a92825F03dD7730a98f879F526c3023A0BfD0D",
+        "nftContractAddress": [
+            "0x04B6b2B8de001CA8aCd9F75e50551A99722fd6b1",
+            "0xf7C2BcD69004c34E1302E1a5397EA8AE858Ab385"
+        ],
+        "networkId": 250,
+        "nftContractNames": {
+            "0x04B6b2B8de001CA8aCd9F75e50551A99722fd6b1": "DoodleLanterns",
+            "0xf7C2BcD69004c34E1302E1a5397EA8AE858Ab385": "Fant-O-Lanterns"
+        },
+        "tiers": {
+            "0x04B6b2B8de001CA8aCd9F75e50551A99722fd6b1": [
+                "Bottom 50%",
+                "Top 26-50%",
+                "Top 16-25%",
+                "Top 6-15%",
+                "Top 5%"
+            ],
+            "0xf7C2BcD69004c34E1302E1a5397EA8AE858Ab385": [
+                "Bottom 50%",
+                "Top 26-50%",
+                "Top 16-25%",
+                "Top 6-15%",
+                "Top 5%"
+            ]
+        },
+        "pointDivider": 864000
+    },
+    {
+        "id": "lanterns-avax",
+        "name": "Lanterns AVAX",
+        "coverImage": "/images/pools/lanterns/avax.png",
+        "poolContractAddress": "0xa1141b500c62E9F50C0fe8d549eC5632FB99DC85",
+        "nftContractAddress": [
+            "0x25B31d4368227117a398854f45694d8deeEd0979"
+        ],
+        "networkId": 43114,
+        "nftContractNames": {
+            "0x25B31d4368227117a398854f45694d8deeEd0979": "DoodleLanterns"
+        },
+        "tiers": {
+            "0x25B31d4368227117a398854f45694d8deeEd0979": [
+                "Bottom 50%",
+                "Top 26-50%",
+                "Top 16-25%",
+                "Top 6-15%",
+                "Top 5%"
+            ]
+        },
+        "pointDivider": 864000
+    },
+    {
         "id": "onis",
         "name": "Onis",
-        "type": "leveling",
         "coverImage": "/images/pools/onis/oni.png",
         "poolContractAddress": "0x81638132e4FC522126b6F1697C408e7630F8f291",
         "nftContractAddress": [
