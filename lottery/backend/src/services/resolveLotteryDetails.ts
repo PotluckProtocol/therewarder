@@ -1,21 +1,44 @@
 import PoolContract from "../PoolContract";
-import getLotteryStorage from "../storage/getLotteryStorage"
+import getLotteryStorage from "../storage/lottery/getLotteryStorage"
+import { UpdateProperties } from "../storage/lottery/ILotteryStorage";
+import getLotteryStateProperties from "./getLotteryStateProperties";
 import updateLotteryState from "./updateLotteryState";
 
 const resolveLotteryDetails = async (id: string) => {
     const lotteryStorage = getLotteryStorage();
-    const lottery = await lotteryStorage.get(id);
+    let lottery = await lotteryStorage.get(id);
     if (lottery && lottery.currentState === 'INITIAL') {
-        await updateLotteryState(id, 'PREPARING');
+        lottery = await updateLotteryState(id, 'PREPARING');
         try {
-            const contract = new PoolContract(lottery.chainId, lottery.contractAddress);
+            const contract = new PoolContract(lottery.chainId, lottery.contractAddress, lottery.startFromBlock);
 
+            console.time('GetStakedWallets');
+            const wallets = await contract.getStakedWallets();
+            console.timeEnd('GetStakedWallets');
 
-            await updateLotteryState(id, 'READY_FOR_LOTTERY');
-        } catch (e) {
-            await updateLotteryState(id, 'ERRORENOUS');
+            console.time('GetWalletLevels');
+            let walletLevelMap: Record<string, number> = {};
+            while (wallets.length > 0) {
+                const chunk = wallets.splice(0, 25);
+                const map = await contract.getWalletLevels(chunk);
+                walletLevelMap = { ...walletLevelMap, ...map };
+            }
+            console.timeEnd('GetWalletLevels');
+
+            console.log(walletLevelMap);
+
+            const updatedLotteryProperties: UpdateProperties = {
+                ...getLotteryStateProperties(lottery, 'READY_FOR_LOTTERY'),
+                lottery: {
+                    tickets: walletLevelMap
+                }
+            }
+
+            await lotteryStorage.update(id, updatedLotteryProperties);
+        } catch (error) {
+            console.log('resolveLotteryDetails error', error);
+            await updateLotteryState(id, 'ERRORENOUS', error);
         }
-
     }
 }
 

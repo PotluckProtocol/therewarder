@@ -7,7 +7,7 @@ import { join } from 'path';
 export default class FileLotteryStorage implements ILotteryStorage {
 
     constructor(
-        private directory
+        private directory: string
     ) { }
 
     async create(item: Omit<LotteryItem, "id">): Promise<string> {
