@@ -22,10 +22,23 @@ const INPUT_FILE = 'data.json';
         const tier = Number(key);
         const tokenIds = TIER_MAP[tier] || [];
 
-        console.log('Tier', tier);
-        console.log('Tokens: ', JSON.stringify(tokenIds));
-        console.log('Tiers:', JSON.stringify(Array(tokenIds.length).fill(tier)))
-        console.log('-----');
+        if (tokenIds.length > 300) {
+            const parts = Math.ceil(tokenIds.length / 250);
+            let part = 1;
+            while (tokenIds.length > 0) {
+                const chunk = tokenIds.splice(0, 250);
+                console.log('Tier', tier, `${part}/${parts}`);
+                console.log('Tokens: ', JSON.stringify(chunk));
+                console.log('Tiers:', JSON.stringify(Array(chunk.length).fill(tier)))
+                console.log('-----');
+                part++;
+            }
+        } else {
+            console.log('Tier', tier);
+            console.log('Tokens: ', JSON.stringify(tokenIds));
+            console.log('Tiers:', JSON.stringify(Array(tokenIds.length).fill(tier)))
+            console.log('-----');
+        }
     });
 
 })();
