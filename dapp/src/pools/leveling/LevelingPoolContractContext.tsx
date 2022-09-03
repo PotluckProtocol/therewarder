@@ -201,7 +201,7 @@ export const LevelingPoolContractProvider: React.FC<PropsWithChildren<{}>> = ({ 
 
     function fixPoints(points: number): number {
         if (poolBaseInfo?.pointDivider) {
-            return Math.floor(points / poolBaseInfo.pointDivider);
+            return points / poolBaseInfo.pointDivider;
         } else {
             return points;
         }

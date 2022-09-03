@@ -178,11 +178,12 @@ const PoolInternal: React.FC<PoolInternalProps> = ({
                 const pointsPerDay = poolContractContext.fixPoints(
                     countPointsPerDay([token.tierIndex], poolContractContext.pointCalculationDetails[nftAddress])
                 );
+
                 return (
                     <tr key={token.tokenId}>
                         <td>#{token.tokenId}</td>
                         <td>{getTierName(poolInfo, token.nftContract, token.tierIndex)}</td>
-                        <td>{pointsPerDay}</td>
+                        <td>{pointsPerDay.toFixed(2)}</td>
                     </tr>
                 );
             });
