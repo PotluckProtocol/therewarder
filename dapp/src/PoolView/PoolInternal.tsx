@@ -247,7 +247,7 @@ const PoolInternal: React.FC<PoolInternalProps> = ({
                             <Subtitle>Collection Stats</Subtitle>
 
                             {nftContractAddresses.map(nftAddress => {
-                                const nftAddressName = ((poolInfo.nftContractNames || {})[nftAddress]) || nftAddress;
+                                const nftAddressName = poolInfo.nftCollections[nftAddress].name;
                                 return (
                                     <CollectionContainer className="mt-6" key={nftAddress}>
                                         <CollectionName className='mb-2'>{nftAddressName}</CollectionName>

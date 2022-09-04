@@ -33,7 +33,7 @@ export const PoolsBaseInfoProvider: React.FC<PropsWithChildren<{}>> = ({ childre
     }
 
     const getByNftContractAddress = (contractAddress: string): PoolBaseInfo | null => {
-        return poolsBaseInfo.find(item => item.nftContractAddress === contractAddress) || null;
+        return poolsBaseInfo.find(item => Object.keys(item.nftCollections).includes(contractAddress)) || null;
     }
 
     const getByPoolContractAddress = (contractAddress: string): PoolBaseInfo | null => {

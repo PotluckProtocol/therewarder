@@ -1,11 +1,14 @@
+export type NFTCollection = {
+    name: string;
+    tiers: string[];
+}
+
 export type PoolBaseInfo = {
     id: string;
     name: string;
-    networkId: number;
     coverImage: string;
-    nftContractAddress: string | string[];
+    networkId: number;
     poolContractAddress: string;
-    tiers?: { [address: string]: string[] };
-    nftContractNames?: { [address: string]: string };
+    nftCollections: Record<string, NFTCollection>;
     pointDivider?: number;
 }
