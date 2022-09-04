@@ -1,6 +1,9 @@
+export type CollectionRarityProvider = 'NFTKey' | 'NFTiers';
+
 export type NFTCollection = {
     name: string;
     tiers: string[];
+    rarityProvider?: CollectionRarityProvider;
 }
 
 export type PoolBaseInfo = {

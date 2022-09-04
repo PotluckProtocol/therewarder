@@ -13,6 +13,7 @@ import getNftContractAddresses from "../pools/getNftContractAddresses";
 import getNftContractName from "../pools/getNftContractName";
 import { LevelingPoolContractContext } from "../pools/leveling/LevelingPoolContractContext";
 import { PoolBaseInfo } from "../pools/PoolBaseInfo";
+import getRarityProviderUrl from "../utils/getRarityProviderUrl";
 import { StakingPopup } from "./StakingPopup";
 import countPointsPerDay from "./utils/countPointsPerDay";
 import { getTierName } from "./utils/getTierName";
@@ -118,6 +119,16 @@ const WrongNetwork = styled.div`
     font-size: .85rem;
 `;
 
+const RarityProviderText = styled.div`
+    color: white;
+    font-size: .85rem;
+`;
+
+const RarityProviderLink = styled.a`
+    color: #5dffff;
+    font-weight: 600;
+`;
+
 const PoolInternal: React.FC<PoolInternalProps> = ({
     poolInfo
 }) => {
@@ -210,6 +221,18 @@ const PoolInternal: React.FC<PoolInternalProps> = ({
         );
     }
 
+    const renderRarityProvider = (nftAddress: string) => {
+        const collection = poolInfo.nftCollections[nftAddress];
+        if (collection && collection.rarityProvider) {
+            const url = getRarityProviderUrl(collection.rarityProvider);
+            return (
+                <RarityProviderText className='mt-2'>
+                    Rarity brought to you by: <RarityProviderLink href={url} target="_blank">{collection.rarityProvider}</RarityProviderLink>.
+                </RarityProviderText>
+            );
+        }
+    }
+
     const createHandleOpenStaking = (nftAddress: string) => {
         return () => {
             setActiveNftContractAddress(nftAddress);
@@ -261,6 +284,8 @@ const PoolInternal: React.FC<PoolInternalProps> = ({
                                             </thead>
                                             {renderTableBody(nftAddress)}
                                         </Table>
+
+                                        {renderRarityProvider(nftAddress)}
 
                                         {isWrongNetwork ? (
                                             <WrongNetwork className="mt-4">
