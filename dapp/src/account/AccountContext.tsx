@@ -2,6 +2,7 @@ import { createContext, PropsWithChildren, useContext, useEffect, useState } fro
 import { ethers } from 'ethers';
 import { resolveNetwork } from "../network/resolveNetwork";
 import { Account } from "./Account"
+import { toast } from "react-toastify";
 
 export type AccountContextType = {
     account: Account | null;
@@ -38,43 +39,47 @@ export const AccountProvider: React.FC<PropsWithChildren<{}>> = ({ children }) =
     const connect = async () => {
 
         const isMetaMask = (window as any).ethereum?.isMetaMask;
-        if (isMetaMask) {
-            setConnecting(true);
-
-            const ethereum = (window as any).ethereum as any;
-            const provider = new ethers.providers.Web3Provider(ethereum);
-
-            await provider.send("eth_requestAccounts", []) as string[];
-
-            const signer = provider.getSigner();
-
-            const walletAddress = await signer.getAddress();
-            const networkId = await signer.getChainId();
-
-            // Add listeners start
-            ethereum.on("accountsChanged", async (walletAddresses: string[]) => {
-                if (walletAddresses[0]) {
-                    window.location.reload();
-                }
-            });
-
-            ethereum.on("chainChanged", () => {
-                window.location.reload();
-            });
-
-            console.log(`Using account: ${walletAddress} (Network: ${networkId})`);
-
-            setAccount({
-                network: resolveNetwork(networkId),
-                walletAddress,
-                web3: provider,
-                signer
-            });
-
-            setConnecting(false);
-
-            localStorage.setItem('walletState', 'connected');
+        if (!isMetaMask) {
+            toast('No MetaMask found...', { type: 'error', theme: 'colored' });
+            return;
         }
+
+        setConnecting(true);
+
+        const ethereum = (window as any).ethereum as any;
+        const provider = new ethers.providers.Web3Provider(ethereum);
+
+        await provider.send("eth_requestAccounts", []) as string[];
+
+        const signer = provider.getSigner();
+
+        const walletAddress = await signer.getAddress();
+        const networkId = await signer.getChainId();
+
+        // Add listeners start
+        ethereum.on("accountsChanged", async (walletAddresses: string[]) => {
+            if (walletAddresses[0]) {
+                window.location.reload();
+            }
+        });
+
+        ethereum.on("chainChanged", () => {
+            window.location.reload();
+        });
+
+        console.log(`Using account: ${walletAddress} (Network: ${networkId})`);
+
+        setAccount({
+            network: resolveNetwork(networkId),
+            walletAddress,
+            web3: provider,
+            signer
+        });
+
+        setConnecting(false);
+
+        localStorage.setItem('walletState', 'connected');
+
     }
 
     const disconnect = async () => {
