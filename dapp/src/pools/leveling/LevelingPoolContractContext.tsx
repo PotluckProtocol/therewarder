@@ -28,7 +28,7 @@ export type LevelingPoolContractContextType = {
     currentLevelPointBoundary: number;
     nextLevelPointBoundary: number;
     pointCalculationDetails: Record<string, PointCalculationDetails>;
-    init(poolBaseInfo: PoolBaseInfo): void;
+    init(poolBaseInfo: PoolBaseInfo, walletAddressOverride?: string): void;
     retrieveTokens(): Promise<void>;
     stakeNfts(nftAddress: string, tokenIds: number[]): Promise<void>;
     unstakeNfts(nftAddress: string, tokenIds: number[]): Promise<void>;
@@ -53,8 +53,10 @@ export const LevelingPoolContractProvider: React.FC<PropsWithChildren<{}>> = ({ 
     const [walletLevel, setWalletLevel] = useState<number>(0);
     const [thisLevelPoints, setThisLevelPoints] = useState<number>(0);
     const [nextLevelPoints, setNextLevelPoints] = useState<number>(0);
+    const [walletAddressOverride, setWalletAddressOverride] = useState<string>('');
     const user = useUser();
-    const walletAddress = user.account?.walletAddress;
+
+    const walletAddress = user.account ? user.account.walletAddress : (walletAddressOverride || undefined);
 
     useEffect(() => {
         if (isInitialized && poolBaseInfo) {
@@ -64,7 +66,7 @@ export const LevelingPoolContractProvider: React.FC<PropsWithChildren<{}>> = ({ 
             intervalBeat(wrapper, walletAddress);
             retrieveTokens();
         }
-    }, [isInitialized, user, poolBaseInfo]);
+    }, [isInitialized, user, poolBaseInfo, walletAddressOverride]);
 
     async function intervalBeat(
         wrapper: PoolContractWrapper,
@@ -107,12 +109,13 @@ export const LevelingPoolContractProvider: React.FC<PropsWithChildren<{}>> = ({ 
     }
 
     useInterval(() => {
+        console.log(wrapper, walletAddress);
         if (wrapper) {
             intervalBeat(wrapper, walletAddress);
         }
     }, 5000);
 
-    async function init(poolBaseInfo: PoolBaseInfo): Promise<void> {
+    async function init(poolBaseInfo: PoolBaseInfo, walletAddressOverride?: string): Promise<void> {
         try {
             const contract = new ethers.Contract(poolBaseInfo.poolContractAddress, abi, user.getSignerOrProvider(poolBaseInfo.networkId));
             const wrapper = new PoolContractWrapper(contract);
@@ -133,6 +136,10 @@ export const LevelingPoolContractProvider: React.FC<PropsWithChildren<{}>> = ({ 
             setPoolBaseInfo(poolBaseInfo);
             setTotalStaked(totalStaked);
             setIsInitialized(true);
+
+            if (walletAddressOverride) {
+                setWalletAddressOverride(walletAddressOverride);
+            }
         } catch (e) {
             console.log('Failed when contacting contract on pool init', e);
             throw e;
