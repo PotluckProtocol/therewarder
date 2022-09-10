@@ -1,37 +1,31 @@
 import { Handler } from "express";
-import checkOwner from "../services/checkOwner";
-import createNewLottery from "../services/createNewLottery";
-import resolveLotteryDetails from "../services/resolveLotteryDetails";
 import runLottery from "../services/runLottery";
 import getLotteryStorage from "../storage/lottery/getLotteryStorage";
-import getSignatureFromRequest from "../utils/getSignatureFromRequest";
+import requireAccess from "./access/requireAccess";
+import HttpErrorNotFound from "../utils/httpErrors/404NotFound";
 
 const runLotteryHandler: Handler = async (req, res) => {
     const { lotteryId } = req.params;
 
-    const signature = getSignatureFromRequest(req);
-    if (!signature) {
-        return res.status(401).send();
-    }
-
     const lotteryStorage = getLotteryStorage();
     const lottery = await lotteryStorage.get(lotteryId);
     if (!lottery) {
-        return res.send(404).send();
+        throw new HttpErrorNotFound();
     }
 
-    const isOwner = checkOwner(lottery.contractAddress, signature);
-    if (!isOwner) {
-        return res.status(403).send();
-    }
-
-    const winners = await runLottery(lotteryId, {
-        winnerCount: 5,
-        drawIntervalMs: 5000,
-        uniqueWinners: true
+    await requireAccess({
+        chainId: lottery.chainId,
+        contractAddress: lottery.contractAddress,
+        req
     });
 
-    res.status(200).send({ winners });
+    const winner = await runLottery(lotteryId, {
+        winnerCount: 5,
+        drawIntervalMs: 5000,
+        strategy: 'WinOne'
+    });
+
+    res.status(200).send({ winner });
 }
 
 export default runLotteryHandler;

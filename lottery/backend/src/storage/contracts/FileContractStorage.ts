@@ -13,17 +13,17 @@ export default class FileContractStorage implements IContractStorage {
     async create(item: ContractItem): Promise<void> {
         await this.saveToFile(item);
     }
-    async get(id: string): Promise<ContractItem | null> {
-        return this.loadFromFile(id);
+    async get(chainId: number, contractAddress: string): Promise<ContractItem | null> {
+        return this.loadFromFile(chainId, contractAddress);
     }
 
     private async saveToFile(item: ContractItem) {
-        const fileName = join(this.directory, `${item.address}.json`);
+        const fileName = join(this.directory, this.createFileName(item.chainId, item.address));
         await fs.writeFile(fileName, JSON.stringify(item), { encoding: 'utf8' });
     }
 
-    private async loadFromFile(addr: string): Promise<ContractItem | null> {
-        const fileName = join(this.directory, `${addr}.json`);
+    private async loadFromFile(chainId: number, addr: string): Promise<ContractItem | null> {
+        const fileName = join(this.directory, this.createFileName(chainId, addr));
         if (!existsSync(fileName)) {
             return null;
         }
@@ -38,6 +38,10 @@ export default class FileContractStorage implements IContractStorage {
         } catch (e) {
             return null;
         }
+    }
+
+    private createFileName(chainId: number, contractAddress: string): string {
+        return `${chainId}__${contractAddress}.json`;
     }
 
 }

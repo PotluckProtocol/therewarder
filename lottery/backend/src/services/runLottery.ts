@@ -1,18 +1,37 @@
 import getLotteryStorage from "../storage/lottery/getLotteryStorage"
+import LotteryItem from "../storage/lottery/LotteryItem";
+import addLotteryWinner from "./addLotteryWinner";
 
 export class LotteryNotFoundError extends Error { }
 export class LotteryNotReadyForLottery extends Error { }
 
+export type LotteryStrategy = 'WinMany' | 'WinOne';
+
 export type RunLotteryOpt = {
     winnerCount: number;
     onLotteryDraw?: (winner: string, drawIndex: number) => void;
-    uniqueWinners?: boolean;
+    strategy: LotteryStrategy;
     drawIntervalMs?: number;
 }
 
 const wait = async (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-const runLottery = async (lotteryId: string, opts: RunLotteryOpt) => {
+const isValidWinner = (
+    lottery: LotteryItem,
+    strategy: LotteryStrategy,
+    winnerWallet: string
+): boolean => {
+    if (strategy === 'WinMany') {
+        return true;
+    } else if (strategy === "WinOne") {
+        const hasWonAlready = (lottery.lottery?.results || []).includes(winnerWallet);
+        return !hasWonAlready;
+    } else {
+        throw new Error(`Unknown lottery strategy "${strategy}"`)
+    }
+}
+
+const runLottery = async (lotteryId: string, opts: RunLotteryOpt): Promise<string | null> => {
 
     const lotteryStorage = getLotteryStorage();
     const lottery = await lotteryStorage.get(lotteryId);
@@ -23,10 +42,7 @@ const runLottery = async (lotteryId: string, opts: RunLotteryOpt) => {
     }
 
     const {
-        winnerCount,
-        drawIntervalMs,
-        uniqueWinners,
-        onLotteryDraw
+        strategy
     } = opts;
 
     const tickets = lottery.lottery?.tickets || {}
@@ -35,23 +51,16 @@ const runLottery = async (lotteryId: string, opts: RunLotteryOpt) => {
         return Array(level).fill(wallet);
     });
 
-    const winnerArray: string[] = [];
-    while (winnerArray.length < winnerCount) {
-        const randomWinningIndex = Math.floor(Math.random() * ticketArray.length);
-        const [winnerWallet] = ticketArray.splice(randomWinningIndex, 1);
-        if (uniqueWinners && winnerArray.includes(winnerWallet)) {
-            continue;
-        }
+    const randomWinningIndex = Math.floor(Math.random() * ticketArray.length);
+    const [winnerWallet] = ticketArray.splice(randomWinningIndex, 1);
 
-        if (typeof onLotteryDraw === 'function') {
-            onLotteryDraw(winnerWallet, winnerArray.length);
-        }
-
-        winnerArray.push(winnerWallet);
-        await wait(drawIntervalMs || 0);
+    if (!isValidWinner(lottery, strategy, winnerWallet)) {
+        return null;
     }
 
-    return winnerArray;
+    await addLotteryWinner(lottery.id, winnerWallet);
+
+    return winnerWallet;
 }
 
 export default runLottery;

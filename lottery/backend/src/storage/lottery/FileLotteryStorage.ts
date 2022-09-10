@@ -33,8 +33,12 @@ export default class FileLotteryStorage implements ILotteryStorage {
         return this.loadFromFile(id);
     }
 
-    getAll(onlyState?: LotteryState | undefined): Promise<LotteryItem[]> {
-        throw new Error("Method not implemented.");
+    async getAll(): Promise<LotteryItem[]> {
+        const promises = (await fs.readdir(this.directory, { withFileTypes: true }))
+            .filter(item => item.isFile())
+            .map(item => this.loadFromFile(item.name.split('.')[0]));
+        const items = await Promise.all(promises);
+        return items.filter(Boolean) as LotteryItem[];
     }
 
     private async saveToFile(item: LotteryItem) {

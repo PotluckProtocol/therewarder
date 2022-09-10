@@ -1,4 +1,5 @@
 type ContractItem = {
+    chainId: number;
     address: string;
     owners: string[];
 }

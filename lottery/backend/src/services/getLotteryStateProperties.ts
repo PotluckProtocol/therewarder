@@ -11,7 +11,6 @@ const getLotteryStateProperties = (
         currentState: newState,
         stateChanges
     }
-
 }
 
 export default getLotteryStateProperties;

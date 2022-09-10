@@ -7,6 +7,11 @@ export type LotteryStateChange = {
     error?: any;
 }
 
+export type LotterySpec = {
+    tickets: Record<string, number>;
+    results?: string[];
+}
+
 type LotteryItem = {
     id: string;
     currentState: LotteryState;
@@ -15,10 +20,7 @@ type LotteryItem = {
     startFromBlock: number;
     contractAddress: string;
     description?: string;
-    lottery?: {
-        tickets: Record<string, number>;
-        results?: string[];
-    }
+    lottery?: LotterySpec;
 }
 
 export default LotteryItem;

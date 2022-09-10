@@ -3,7 +3,7 @@ import getPoolAbi from "./utils/getPoolAbi";
 import getProviderForChain from "./utils/getProviderForChain";
 
 const NEW_WALLET_STAKED_EVENT = 'NewWalletStaked';
-const MAX_EVENTS_PER_REQUEST = 2500;
+const MAX_EVENTS_PER_REQUEST = 2040;
 
 class PoolContract {
 

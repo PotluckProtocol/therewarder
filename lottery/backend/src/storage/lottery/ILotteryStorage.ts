@@ -6,5 +6,5 @@ export default interface ILotteryStorage {
     create(item: Omit<LotteryItem, "id">): Promise<string>;
     update(id: string, properties: UpdateProperties): Promise<boolean>;
     get(id: string): Promise<LotteryItem | null>;
-    getAll(onlyState?: LotteryState): Promise<LotteryItem[]>;
+    getAll(): Promise<LotteryItem[]>;
 }

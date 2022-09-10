@@ -12,18 +12,18 @@ const resolveLotteryDetails = async (id: string) => {
         try {
             const contract = new PoolContract(lottery.chainId, lottery.contractAddress, lottery.startFromBlock);
 
-            console.time('GetStakedWallets');
+            console.time(`GetStakedWallets-${id}`);
             const wallets = await contract.getStakedWallets();
-            console.timeEnd('GetStakedWallets');
+            console.timeEnd(`GetStakedWallets-${id}`);
 
-            console.time('GetWalletLevels');
+            console.time(`GetWalletLevels-${id}`);
             let walletLevelMap: Record<string, number> = {};
             while (wallets.length > 0) {
                 const chunk = wallets.splice(0, 25);
                 const map = await contract.getWalletLevels(chunk);
                 walletLevelMap = { ...walletLevelMap, ...map };
             }
-            console.timeEnd('GetWalletLevels');
+            console.timeEnd(`GetWalletLevels-${id}`);
 
             console.log(walletLevelMap);
 
@@ -33,6 +33,13 @@ const resolveLotteryDetails = async (id: string) => {
                     tickets: walletLevelMap
                 }
             }
+
+            const ticketArray: string[] = Object.keys(walletLevelMap).flatMap(wallet => {
+                const level = walletLevelMap[wallet];
+                return Array(level).fill(wallet);
+            });
+
+            console.log(JSON.stringify(ticketArray));
 
             await lotteryStorage.update(id, updatedLotteryProperties);
         } catch (error) {

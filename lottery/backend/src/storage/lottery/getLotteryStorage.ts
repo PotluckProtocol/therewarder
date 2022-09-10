@@ -1,8 +1,9 @@
 import { existsSync, mkdirSync } from "fs";
+import { join } from "path";
 import FileLotteryStorage from "./FileLotteryStorage";
 import ILotteryStorage from "./ILotteryStorage";
 
-const DATA_DIR = 'data';
+const DATA_DIR = join('data', 'lotteries');
 
 let storage: ILotteryStorage;
 
