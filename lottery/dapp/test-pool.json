@@ -1,0 +1,21 @@
+{
+    "id": "test",
+    "name": "Test",
+    "coverImage": "/images/pools/onis/oni.png",
+    "networkId": 4002,
+    "poolContractAddress": "0x3C952E84ddf968810A90BEE8c04e4be17FCED753",
+    "nftCollections": {
+        "0x53eACFC46eB98FB00E9d9344143A261d14b957F6": {
+            "name": "Labson",
+            "tiers": [
+                "Bottom 50%",
+                "Top 26-50%",
+                "Top 16-25%",
+                "Top 6-15%",
+                "Top 5%"
+            ],
+            "rarityProvider": "NFTiers"
+        }
+    },
+    "pointDivider": 864000
+}

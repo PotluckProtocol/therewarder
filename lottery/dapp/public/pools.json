@@ -1,0 +1,79 @@
+[
+    {
+        "id": "lanterns-ftm",
+        "name": "Lanterns FTM",
+        "coverImage": "/images/pools/lanterns/ftm.png",
+        "networkId": 250,
+        "poolContractAddress": "0xD3a92825F03dD7730a98f879F526c3023A0BfD0D",
+        "nftCollections": {
+            "0x04B6b2B8de001CA8aCd9F75e50551A99722fd6b1": {
+                "name": "DoodleLanterns",
+                "tiers": [
+                    "Bottom 50%",
+                    "Top 26-50%",
+                    "Top 16-25%",
+                    "Top 6-15%",
+                    "Top 5%"
+                ],
+                "rarityProvider": "NFTKey"
+            },
+            "0xf7C2BcD69004c34E1302E1a5397EA8AE858Ab385": {
+                "name": "Fant-O-Lanterns",
+                "tiers": [
+                    "Bottom 50%",
+                    "Top 26-50%",
+                    "Top 16-25%",
+                    "Top 6-15%",
+                    "Top 5%"
+                ],
+                "rarityProvider": "NFTKey"
+            }
+        },
+        "pointDivider": 864000
+    },
+    {
+        "id": "lanterns-avax",
+        "name": "Lanterns AVAX",
+        "coverImage": "/images/pools/lanterns/avax.png",
+        "networkId": 43114,
+        "poolContractAddress": "0xa1141b500c62E9F50C0fe8d549eC5632FB99DC85",
+        "nftCollections": {
+            "0x25B31d4368227117a398854f45694d8deeEd0979": {
+                "name": "DoodleLanterns",
+                "tiers": [
+                    "Bottom 50%",
+                    "Top 26-50%",
+                    "Top 16-25%",
+                    "Top 6-15%",
+                    "Top 5%"
+                ],
+                "rarityProvider": "NFTKey"
+            }
+        },
+        "nftContractAddress": [
+            "0x25B31d4368227117a398854f45694d8deeEd0979"
+        ],
+        "pointDivider": 864000
+    },
+    {
+        "id": "onis",
+        "name": "Onis",
+        "coverImage": "/images/pools/onis/oni.png",
+        "networkId": 250,
+        "poolContractAddress": "0x81638132e4FC522126b6F1697C408e7630F8f291",
+        "nftCollections": {
+            "0x41497050c1f6f76b6AEA8A687df46A65Fa2AcDc4": {
+                "name": "Onis Retribution",
+                "tiers": [
+                    "Bottom 50%",
+                    "Top 26-50%",
+                    "Top 16-25%",
+                    "Top 6-15%",
+                    "Top 5%"
+                ],
+                "rarityProvider": "NFTiers"
+            }
+        },
+        "pointDivider": 864000
+    }
+]
