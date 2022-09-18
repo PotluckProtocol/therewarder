@@ -38,6 +38,15 @@ export const NETWORKS: Network[] = [
             url: 'https://polygonscan.com/'
         }
     }, {
+        name: 'Ethereum Mainnet',
+        symbol: 'ETH',
+        networkId: 1,
+        decimals: 18,
+        blockchainExplorer: {
+            name: 'Etherscan',
+            url: 'https://etherscan.com/'
+        }
+    }, {
         name: 'Fantom TESTNET',
         symbol: 'FTM',
         networkId: 4002,

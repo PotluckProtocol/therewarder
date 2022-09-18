@@ -1,3 +1,4 @@
+import { writeFileSync } from "fs";
 import PoolContract from "../PoolContract";
 import getLotteryStorage from "../storage/lottery/getLotteryStorage"
 import { UpdateProperties } from "../storage/lottery/ILotteryStorage";
@@ -39,7 +40,7 @@ const resolveLotteryDetails = async (id: string) => {
                 return Array(level).fill(wallet);
             });
 
-            console.log(JSON.stringify(ticketArray));
+            writeFileSync(`lottery_${lottery.id}.txt`, ticketArray.join(',\n'), { encoding: 'utf8' });
 
             await lotteryStorage.update(id, updatedLotteryProperties);
         } catch (error) {

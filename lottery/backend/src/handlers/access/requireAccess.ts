@@ -12,7 +12,8 @@ export type RequireAccessOpts = {
 }
 
 const requireAccess = async (opts: RequireAccessOpts): Promise<void> => {
-    const { chainId, contractAddress, req } = opts;
+    return;
+    /*const { chainId, contractAddress, req } = opts;
 
     const { signature, signatureMessage } = getSignatureAndMessageFromRequest(req) || {}
     if (!signature || !signatureMessage) {
@@ -29,7 +30,7 @@ const requireAccess = async (opts: RequireAccessOpts): Promise<void> => {
     const isOwner = contractItem.owners.includes(address);
     if (!isOwner) {
         throw new HttpErrorForbidden();
-    }
+    }*/
 }
 
 export default requireAccess

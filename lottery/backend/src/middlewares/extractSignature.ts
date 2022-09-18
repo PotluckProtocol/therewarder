@@ -1,7 +1,8 @@
+import { Handler } from "express";
 import HttpErrorUnauthorized from "../utils/httpErrors/401Unauthorized";
 import RequestWithUser from "../utils/RequestWithUser";
 
-const extractSignatureMiddleware = (req, res, next) => {
+const extractSignatureMiddleware: Handler = (req, res, next) => {
     const authHeaderContent = req.header('auth');
     if (!authHeaderContent) {
         throw new HttpErrorUnauthorized();
