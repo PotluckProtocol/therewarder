@@ -6,6 +6,10 @@ import { AccountContext } from "./AccountContext";
 export type ProviderOrSigner = ethers.providers.Provider | ethers.Signer;
 
 const PUBLIC_PROVIDER_MAP: any = {
+    1: {
+        isPublic: true,
+        web3: new ethers.providers.JsonRpcProvider('https://rpc.ankr.com/eth/')
+    },
     250: {
         isPublic: true,
         web3: new ethers.providers.JsonRpcProvider('https://rpc.ankr.com/fantom/')

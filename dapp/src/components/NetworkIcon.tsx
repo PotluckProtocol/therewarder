@@ -1,6 +1,7 @@
 
 
 const ICON_MAP: { [networkId: number]: string } = {
+    1: '/images/network-icons/ethereum.svg',
     // Matic
     137: '/images/network-icons/matic.svg',
 
