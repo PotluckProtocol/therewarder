@@ -1,5 +1,26 @@
 [
     {
+        "id": "unconciousblobs-avax",
+        "name": "Unconcious Blobs",
+        "coverImage": "/images/pools/unconciousblobs/cover.png",
+        "networkId": 43114,
+        "poolContractAddress": "0x2c44A822Ed03A9333DdDC8dc00f82169Fdcf7879",
+        "nftCollections": {
+            "0xb1c29CF7b329EF7e62765BCEa494B00514C5D3e1": {
+                "name": "Unconcious Blobs",
+                "tiers": [
+                    "Bottom 50%",
+                    "Top 26-50%",
+                    "Top 16-25%",
+                    "Top 6-15%",
+                    "Top 5%"
+                ],
+                "rarityProvider": "NFTKey"
+            }
+        },
+        "pointDivider": 864000
+    },
+    {
         "id": "lanterns-ftm",
         "name": "Lanterns FTM",
         "coverImage": "/images/pools/lanterns/ftm.png",
