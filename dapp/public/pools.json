@@ -1,5 +1,26 @@
 [
     {
+        "id": "phd2-ftm",
+        "name": "Paint Huffing Degenerates 2",
+        "coverImage": "/images/pools/phd2/cover.png",
+        "networkId": 250,
+        "poolContractAddress": "0x1410359273b61Da9a17a483B71eb5d3256982807",
+        "nftCollections": {
+            "0xb891d26911A6733b23248fdCF733af075e092338": {
+                "name": "Paint Huffing Degenerates 2",
+                "tiers": [
+                    "Bottom 50%",
+                    "Top 26-50%",
+                    "Top 16-25%",
+                    "Top 6-15%",
+                    "Top 5%"
+                ],
+                "rarityProvider": "NFTiers"
+            }
+        },
+        "pointDivider": 864000
+    },
+    {
         "id": "unconciousblobs-avax",
         "name": "Unconcious Blobs",
         "coverImage": "/images/pools/unconciousblobs/cover.png",
