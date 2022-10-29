@@ -16,6 +16,12 @@
                     "Top 5%"
                 ],
                 "rarityProvider": "NFTiers"
+            },
+            "0x27413f713600f9E159FE7a0C158BA2a78778f37e": {
+                "name": "Paint Huffing Degenerates",
+                "tiers": [
+                    "Top 100%"
+                ]
             }
         },
         "pointDivider": 864000
