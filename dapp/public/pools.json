@@ -43,6 +43,17 @@
                     "Top 5%"
                 ],
                 "rarityProvider": "NFTKey"
+            },
+            "0x2F6E4CF5A09d7666494Fc5d41CE284b4Fc448C68": {
+                "name": "Unconcious Blobs II",
+                "tiers": [
+                    "Bottom 50%",
+                    "Top 26-50%",
+                    "Top 16-25%",
+                    "Top 6-15%",
+                    "Top 5%"
+                ],
+                "rarityProvider": "NFTKey"
             }
         },
         "pointDivider": 864000
